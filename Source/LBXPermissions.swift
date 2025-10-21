@@ -12,7 +12,7 @@ import Photos
 class LBXPermissions: NSObject {
     
     // MARK: - Photo Library Permission
-    static func authorizePhoto(completion: @escaping (Bool) -> Void) {
+    static func authorizePhotoWith(completion: @escaping (Bool) -> Void) {
         let status = PHPhotoLibrary.authorizationStatus(for: .readWrite)
         switch status {
         case .authorized, .limited:
@@ -31,7 +31,7 @@ class LBXPermissions: NSObject {
     }
 
     // MARK: - Camera Permission
-    static func authorizeCamera(completion: @escaping (Bool) -> Void) {
+    static func authorizeCameraWith(completion: @escaping (Bool) -> Void) {
         switch AVCaptureDevice.authorizationStatus(for: .video) {
         case .authorized:
             completion(true)
@@ -49,7 +49,7 @@ class LBXPermissions: NSObject {
     }
 
     // MARK: - Open App Settings
-    static func openSystemSettings() {
+    static func jumpToSystemPrivacySetting() {
         guard let url = URL(string: UIApplication.openSettingsURLString) else { return }
         UIApplication.shared.open(url, options: [:], completionHandler: nil)
     }
